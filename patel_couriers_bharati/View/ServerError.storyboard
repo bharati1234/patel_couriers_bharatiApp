@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Server ErrorVC-->
+        <scene sceneID="PaU-Sj-XvX">
+            <objects>
+                <viewController storyboardIdentifier="ServerErrorVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qZ1-0t-DA2" customClass="ServerErrorVC" customModule="patel_couriers_bharati" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ebs-In-ldi">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19k-XR-PpC" customClass="CardView" customModule="Patel_Couriers" customModuleProvider="target">
+                                <rect key="frame" x="10" y="69" width="373" height="739"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="server_error" translatesAutoresizingMaskIntoConstraints="NO" id="f47-VY-esV">
+                                        <rect key="frame" x="20" y="100.00000000000001" width="333" height="163.33333333333337"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="f47-VY-esV" secondAttribute="height" multiplier="671:329" id="KG0-nc-thr"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4h-2Z-Fag">
+                                        <rect key="frame" x="158.66666666666666" y="616" width="56" height="33"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <state key="normal" title="Reload">
+                                            <color key="titleColor" red="0.38718041780000001" green="0.0224916935" blue="0.077175013720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnReloadTap:" destination="qZ1-0t-DA2" eventType="touchUpInside" id="kCB-c2-uN6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PRO-wv-X65">
+                                        <rect key="frame" x="136.66666666666666" y="669" width="100" height="40"/>
+                                        <color key="backgroundColor" red="0.38718041780000001" green="0.0224916935" blue="0.077175013720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Gzn-6R-GoD"/>
+                                            <constraint firstAttribute="width" constant="100" id="H69-QI-21B"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Ok">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnOKTap:" destination="qZ1-0t-DA2" eventType="touchUpInside" id="uNW-4a-q6V"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server is Unreachable !!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kin-yn-l0b">
+                                        <rect key="frame" x="61" y="293.33333333333331" width="251" height="26.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <color key="textColor" red="0.38718041780000001" green="0.0224916935" blue="0.077175013720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VX-Gc-jAi">
+                                        <rect key="frame" x="40" y="349.66666666666669" width="293" height="67"/>
+                                        <string key="text">We are optimizing server performance,
+
+Currently server is unable to process your request, Please try later!</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="5VX-Gc-jAi" firstAttribute="top" secondItem="Kin-yn-l0b" secondAttribute="bottom" constant="30" id="7Go-Dh-um8"/>
+                                    <constraint firstAttribute="trailing" secondItem="f47-VY-esV" secondAttribute="trailing" constant="20" id="8Xy-j0-7G7"/>
+                                    <constraint firstItem="PRO-wv-X65" firstAttribute="top" secondItem="p4h-2Z-Fag" secondAttribute="bottom" constant="20" id="Ahj-SN-Ckf"/>
+                                    <constraint firstAttribute="bottom" secondItem="PRO-wv-X65" secondAttribute="bottom" constant="30" id="GNP-g4-A83"/>
+                                    <constraint firstItem="Kin-yn-l0b" firstAttribute="centerX" secondItem="19k-XR-PpC" secondAttribute="centerX" id="I1T-Ss-sND"/>
+                                    <constraint firstItem="Kin-yn-l0b" firstAttribute="top" secondItem="f47-VY-esV" secondAttribute="bottom" constant="30" id="UeX-5c-PYk"/>
+                                    <constraint firstItem="PRO-wv-X65" firstAttribute="centerX" secondItem="19k-XR-PpC" secondAttribute="centerX" id="W4N-8u-UwC"/>
+                                    <constraint firstItem="5VX-Gc-jAi" firstAttribute="leading" secondItem="19k-XR-PpC" secondAttribute="leading" constant="40" id="i7n-AI-aaN"/>
+                                    <constraint firstItem="f47-VY-esV" firstAttribute="top" secondItem="19k-XR-PpC" secondAttribute="top" constant="100" id="ljy-BQ-Ixv"/>
+                                    <constraint firstItem="f47-VY-esV" firstAttribute="leading" secondItem="19k-XR-PpC" secondAttribute="leading" constant="20" id="oqf-9E-udJ"/>
+                                    <constraint firstItem="p4h-2Z-Fag" firstAttribute="centerX" secondItem="19k-XR-PpC" secondAttribute="centerX" id="wpb-bE-zNS"/>
+                                    <constraint firstAttribute="trailing" secondItem="5VX-Gc-jAi" secondAttribute="trailing" constant="40" id="zHf-vp-5KC"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerradius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" red="0.29411764709999999" green="0.035294117649999998" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wif-yr-LRg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="19k-XR-PpC" firstAttribute="leading" secondItem="wif-yr-LRg" secondAttribute="leading" constant="10" id="4vV-d7-XXD"/>
+                            <constraint firstItem="wif-yr-LRg" firstAttribute="bottom" secondItem="19k-XR-PpC" secondAttribute="bottom" constant="10" id="7q1-Uc-gN6"/>
+                            <constraint firstItem="19k-XR-PpC" firstAttribute="top" secondItem="wif-yr-LRg" secondAttribute="top" constant="10" id="BXP-SW-c1m"/>
+                            <constraint firstItem="wif-yr-LRg" firstAttribute="trailing" secondItem="19k-XR-PpC" secondAttribute="trailing" constant="10" id="nfF-bv-C7s"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backView" destination="19k-XR-PpC" id="Icu-mD-vFK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C45-jl-vaY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-847" y="-7"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="server_error" width="671" height="329"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
