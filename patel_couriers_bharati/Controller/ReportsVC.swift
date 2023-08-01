@@ -51,7 +51,23 @@ class ReportsVC: UIViewController {
         self.navigationController?.pushViewController(billRegisterReportVC, animated: true)
     }
     
+    @IBAction func customerDetailsTap(_ sender: Any) {
+        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "CustomerDetails",bundle: nil)
+        let customerDetailsVC = mainStoryBoard.instantiateViewController(withIdentifier: "CustomerDetailsVC") as! CustomerDetailsVC
+        self.navigationController?.pushViewController(customerDetailsVC, animated: true)
+    }
+    @IBAction func trackbtnTap(_ sender: Any) {
+        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "TRACK",bundle: nil)
+        let trackReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "TrackReportVC") as! TrackReportVC
+        self.navigationController?.pushViewController(trackReportVC, animated: true)
+        
+    }
     
+    @IBAction func btnProfileTap(_ sender: Any) {
+        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Profile",bundle: nil)
+        let profileVC = mainStoryBoard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+        self.navigationController?.pushViewController(profileVC, animated: true)
+    }
 }
 
 

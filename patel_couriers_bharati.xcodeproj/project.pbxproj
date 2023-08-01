@@ -14,6 +14,7 @@
 		01131C5F2A6AB677006D5A70 /* ManifestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01131C5E2A6AB677006D5A70 /* ManifestService.swift */; };
 		01131C612A6AB941006D5A70 /* ManiFestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01131C602A6AB941006D5A70 /* ManiFestDestination.swift */; };
 		01131C632A6AB9B4006D5A70 /* ManiFestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01131C622A6AB9B4006D5A70 /* ManiFestStatus.swift */; };
+		011A81002A78E5D3009F492C /* SearchCustomerOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A80FF2A78E5D3009F492C /* SearchCustomerOrderVC.swift */; };
 		011B7B742A69348E002A3474 /* ManifestNumberHelpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011B7B732A69348E002A3474 /* ManifestNumberHelpVC.swift */; };
 		011F2EFA2A67BB8F00ADD3B4 /* BaggageReportSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F2EF92A67BB8F00ADD3B4 /* BaggageReportSearchVC.swift */; };
 		011F2F232A67C03800ADD3B4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F2F0A2A67C03800ADD3B4 /* Constants.swift */; };
@@ -43,6 +44,8 @@
 		011F2F3E2A67C26000ADD3B4 /* TextField+CustomText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F2F3B2A67C26000ADD3B4 /* TextField+CustomText.swift */; };
 		011F2F3F2A67C26000ADD3B4 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F2F3C2A67C26000ADD3B4 /* UIImage+Gif.swift */; };
 		011F2F452A67CAF500ADD3B4 /* WayBillReportSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F2F442A67CAF500ADD3B4 /* WayBillReportSearchVC.swift */; };
+		0123B9142A791B4D0014B163 /* TrackingReportWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0123B9132A791B4D0014B163 /* TrackingReportWebViewVC.swift */; };
+		0123B9172A7920AF0014B163 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0123B9162A7920AF0014B163 /* Profile.storyboard */; };
 		012AA5D12A73ECE9002AB27B /* WayBillCommonModelFromService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012AA5D02A73ECE9002AB27B /* WayBillCommonModelFromService.swift */; };
 		01335F832A6F99AB0017AF17 /* BaggageReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335F822A6F99AA0017AF17 /* BaggageReportVC.swift */; };
 		01335F852A6F9B7E0017AF17 /* BaggageReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01335F842A6F9B7E0017AF17 /* BaggageReportData.swift */; };
@@ -61,8 +64,12 @@
 		016883D92A6A9ED100D5492F /* ManiFestRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016883D82A6A9ED100D5492F /* ManiFestRoute.swift */; };
 		017E5B702A78CEC300F26197 /* LoadRevenueReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E5B6E2A78CEC300F26197 /* LoadRevenueReportVC.swift */; };
 		017E5B712A78CEC300F26197 /* LoadRevenueSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E5B6F2A78CEC300F26197 /* LoadRevenueSearchVC.swift */; };
+		017E5B742A78E05900F26197 /* CustomerDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 017E5B732A78E05900F26197 /* CustomerDetails.storyboard */; };
+		017E5B772A78E0AC00F26197 /* CustomerDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E5B762A78E0AC00F26197 /* CustomerDetailsVC.swift */; };
 		0182552C2A7252720073DC59 /* WayBillReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0182552B2A7252720073DC59 /* WayBillReportVC.swift */; };
 		019438782A67FEB3009A5FBB /* BillRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019438772A67FEB3009A5FBB /* BillRegisterVC.swift */; };
+		01B1621A2A79215200DD7436 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B162192A79215200DD7436 /* ProfileVC.swift */; };
+		01B1621C2A7929E600DD7436 /* ImageCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B1621B2A7929E600DD7436 /* ImageCardView.swift */; };
 		01B2A0892A617B5C00D03825 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2A0882A617B5C00D03825 /* AppDelegate.swift */; };
 		01B2A08B2A617B5C00D03825 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2A08A2A617B5C00D03825 /* SceneDelegate.swift */; };
 		01B2A08D2A617B5D00D03825 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2A08C2A617B5C00D03825 /* ViewController.swift */; };
@@ -74,6 +81,8 @@
 		01B2A0A92A617E6500D03825 /* ReportsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B2A0A82A617E6500D03825 /* ReportsVC.swift */; };
 		01C250092A727602008587B9 /* WayBillReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C250082A727602008587B9 /* WayBillReportData.swift */; };
 		01C2500B2A72923F008587B9 /* WayBillReportDataWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2500A2A72923F008587B9 /* WayBillReportDataWebView.swift */; };
+		01C7C5FB2A7905B300E21A2B /* TRACK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C7C5FA2A7905B300E21A2B /* TRACK.storyboard */; };
+		01C7C5FE2A7906A900E21A2B /* TrackReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C7C5FD2A7906A900E21A2B /* TrackReportVC.swift */; };
 		01CA45ED2A77E8AA00DAAC15 /* BillRegisterOpBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CA45EC2A77E8AA00DAAC15 /* BillRegisterOpBranch.swift */; };
 		01CF8B242A714A4E00A37081 /* WayBillProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF8B232A714A4E00A37081 /* WayBillProduct.swift */; };
 		01CF8B262A71561300A37081 /* BillRegisterReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF8B252A71561300A37081 /* BillRegisterReportVC.swift */; };
@@ -110,6 +119,7 @@
 		01131C5E2A6AB677006D5A70 /* ManifestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManifestService.swift; sourceTree = "<group>"; };
 		01131C602A6AB941006D5A70 /* ManiFestDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManiFestDestination.swift; sourceTree = "<group>"; };
 		01131C622A6AB9B4006D5A70 /* ManiFestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManiFestStatus.swift; sourceTree = "<group>"; };
+		011A80FF2A78E5D3009F492C /* SearchCustomerOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCustomerOrderVC.swift; sourceTree = "<group>"; };
 		011B7B732A69348E002A3474 /* ManifestNumberHelpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManifestNumberHelpVC.swift; sourceTree = "<group>"; };
 		011F2EF92A67BB8F00ADD3B4 /* BaggageReportSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggageReportSearchVC.swift; sourceTree = "<group>"; };
 		011F2F0A2A67C03800ADD3B4 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -139,6 +149,8 @@
 		011F2F3B2A67C26000ADD3B4 /* TextField+CustomText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextField+CustomText.swift"; sourceTree = "<group>"; };
 		011F2F3C2A67C26000ADD3B4 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		011F2F442A67CAF500ADD3B4 /* WayBillReportSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillReportSearchVC.swift; sourceTree = "<group>"; };
+		0123B9132A791B4D0014B163 /* TrackingReportWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingReportWebViewVC.swift; sourceTree = "<group>"; };
+		0123B9162A7920AF0014B163 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		012AA5D02A73ECE9002AB27B /* WayBillCommonModelFromService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillCommonModelFromService.swift; sourceTree = "<group>"; };
 		01335F822A6F99AA0017AF17 /* BaggageReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggageReportVC.swift; sourceTree = "<group>"; };
 		01335F842A6F9B7E0017AF17 /* BaggageReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaggageReportData.swift; sourceTree = "<group>"; };
@@ -157,8 +169,12 @@
 		016883D82A6A9ED100D5492F /* ManiFestRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManiFestRoute.swift; sourceTree = "<group>"; };
 		017E5B6E2A78CEC300F26197 /* LoadRevenueReportVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadRevenueReportVC.swift; sourceTree = "<group>"; };
 		017E5B6F2A78CEC300F26197 /* LoadRevenueSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadRevenueSearchVC.swift; sourceTree = "<group>"; };
+		017E5B732A78E05900F26197 /* CustomerDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomerDetails.storyboard; sourceTree = "<group>"; };
+		017E5B762A78E0AC00F26197 /* CustomerDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailsVC.swift; sourceTree = "<group>"; };
 		0182552B2A7252720073DC59 /* WayBillReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillReportVC.swift; sourceTree = "<group>"; };
 		019438772A67FEB3009A5FBB /* BillRegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillRegisterVC.swift; sourceTree = "<group>"; };
+		01B162192A79215200DD7436 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		01B1621B2A7929E600DD7436 /* ImageCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCardView.swift; sourceTree = "<group>"; };
 		01B2A0852A617B5C00D03825 /* patel_couriers_bharati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = patel_couriers_bharati.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B2A0882A617B5C00D03825 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01B2A08A2A617B5C00D03825 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +188,8 @@
 		01B2A0A82A617E6500D03825 /* ReportsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsVC.swift; sourceTree = "<group>"; };
 		01C250082A727602008587B9 /* WayBillReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillReportData.swift; sourceTree = "<group>"; };
 		01C2500A2A72923F008587B9 /* WayBillReportDataWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillReportDataWebView.swift; sourceTree = "<group>"; };
+		01C7C5FA2A7905B300E21A2B /* TRACK.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TRACK.storyboard; sourceTree = "<group>"; };
+		01C7C5FD2A7906A900E21A2B /* TrackReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackReportVC.swift; sourceTree = "<group>"; };
 		01CA45EC2A77E8AA00DAAC15 /* BillRegisterOpBranch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillRegisterOpBranch.swift; sourceTree = "<group>"; };
 		01CF8B232A714A4E00A37081 /* WayBillProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayBillProduct.swift; sourceTree = "<group>"; };
 		01CF8B252A71561300A37081 /* BillRegisterReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillRegisterReportVC.swift; sourceTree = "<group>"; };
@@ -225,6 +243,7 @@
 		011F2F092A67C03800ADD3B4 /* MyLib */ = {
 			isa = PBXGroup;
 			children = (
+				01B1621B2A7929E600DD7436 /* ImageCardView.swift */,
 				011F2F0A2A67C03800ADD3B4 /* Constants.swift */,
 				011F2F0B2A67C03800ADD3B4 /* ServerErrorVC.swift */,
 				011F2F0C2A67C03800ADD3B4 /* SwiftyJSON.swift */,
@@ -271,8 +290,8 @@
 		011F2F402A67C89C00ADD3B4 /* LoadRevenue Search */ = {
 			isa = PBXGroup;
 			children = (
-				017E5B6E2A78CEC300F26197 /* LoadRevenueReportVC.swift */,
 				017E5B6F2A78CEC300F26197 /* LoadRevenueSearchVC.swift */,
+				017E5B6E2A78CEC300F26197 /* LoadRevenueReportVC.swift */,
 			);
 			path = "LoadRevenue Search";
 			sourceTree = "<group>";
@@ -286,6 +305,14 @@
 				0182552B2A7252720073DC59 /* WayBillReportVC.swift */,
 			);
 			path = "WayBill Report Search";
+			sourceTree = "<group>";
+		};
+		0123B9152A7920910014B163 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0123B9162A7920AF0014B163 /* Profile.storyboard */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		016883C92A6A829000D5492F /* Manifest Search */ = {
@@ -328,6 +355,23 @@
 			path = "Bill Register";
 			sourceTree = "<group>";
 		};
+		017E5B722A78E01D00F26197 /* Customer Details */ = {
+			isa = PBXGroup;
+			children = (
+				017E5B732A78E05900F26197 /* CustomerDetails.storyboard */,
+			);
+			path = "Customer Details";
+			sourceTree = "<group>";
+		};
+		017E5B752A78E06300F26197 /* Customer Details */ = {
+			isa = PBXGroup;
+			children = (
+				017E5B762A78E0AC00F26197 /* CustomerDetailsVC.swift */,
+				011A80FF2A78E5D3009F492C /* SearchCustomerOrderVC.swift */,
+			);
+			path = "Customer Details";
+			sourceTree = "<group>";
+		};
 		019438762A67FE92009A5FBB /* Bill Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +379,14 @@
 				01CF8B252A71561300A37081 /* BillRegisterReportVC.swift */,
 			);
 			path = "Bill Register";
+			sourceTree = "<group>";
+		};
+		01B162182A79213400DD7436 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				01B162192A79215200DD7436 /* ProfileVC.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		01B2A07C2A617B5C00D03825 = {
@@ -377,6 +429,9 @@
 		01B2A09C2A617CC700D03825 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0123B9152A7920910014B163 /* Profile */,
+				01C7C5F92A79059600E21A2B /* Track */,
+				017E5B722A78E01D00F26197 /* Customer Details */,
 				01B2A0A22A617D5F00D03825 /* Reports */,
 				0144116D2A6E5E5700D839AF /* ServerError.storyboard */,
 				014411792A6EC9EA00D839AF /* AlertDialogue.storyboard */,
@@ -427,11 +482,14 @@
 		01B2A09E2A617CFA00D03825 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01B162182A79213400DD7436 /* Profile */,
+				01C7C5FC2A79068100E21A2B /* Track */,
 				01B2A0A52A617DC200D03825 /* ManiFestSearch */,
 				011F2EF82A67BB4F00ADD3B4 /* BaggageReport Search */,
 				011F2F402A67C89C00ADD3B4 /* LoadRevenue Search */,
 				011F2F432A67CABB00ADD3B4 /* WayBill Report Search */,
 				019438762A67FE92009A5FBB /* Bill Register */,
+				017E5B752A78E06300F26197 /* Customer Details */,
 				01B2A0A82A617E6500D03825 /* ReportsVC.swift */,
 			);
 			path = Controller;
@@ -476,6 +534,23 @@
 				014411712A6EA07300D839AF /* ManifestReportVC.swift */,
 			);
 			path = ManiFestSearch;
+			sourceTree = "<group>";
+		};
+		01C7C5F92A79059600E21A2B /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				01C7C5FA2A7905B300E21A2B /* TRACK.storyboard */,
+			);
+			path = Track;
+			sourceTree = "<group>";
+		};
+		01C7C5FC2A79068100E21A2B /* Track */ = {
+			isa = PBXGroup;
+			children = (
+				01C7C5FD2A7906A900E21A2B /* TrackReportVC.swift */,
+				0123B9132A791B4D0014B163 /* TrackingReportWebViewVC.swift */,
+			);
+			path = Track;
 			sourceTree = "<group>";
 		};
 		01E903672A69453A00F6560F /* Table View Cell */ = {
@@ -556,6 +631,9 @@
 				016883D42A6A873300D5492F /* Waybill.storyboard in Resources */,
 				011F2F2B2A67C03800ADD3B4 /* DateTimePicker.storyboard in Resources */,
 				01B2A0902A617B5D00D03825 /* Main.storyboard in Resources */,
+				01C7C5FB2A7905B300E21A2B /* TRACK.storyboard in Resources */,
+				017E5B742A78E05900F26197 /* CustomerDetails.storyboard in Resources */,
+				0123B9172A7920AF0014B163 /* Profile.storyboard in Resources */,
 				016883CB2A6A82B100D5492F /* Manifest.storyboard in Resources */,
 				016883D12A6A869A00D5492F /* LoadRevenue.storyboard in Resources */,
 			);
@@ -576,6 +654,7 @@
 				01127E5F2A711B090007B374 /* WayBillListSearchData.swift in Sources */,
 				011F2F322A67C03800ADD3B4 /* TabCell.swift in Sources */,
 				01DFA6692A6FDC7400710974 /* LoadRevenueService.swift in Sources */,
+				011A81002A78E5D3009F492C /* SearchCustomerOrderVC.swift in Sources */,
 				01FE2A882A73BE27004D636A /* LoadRevenueReportData.swift in Sources */,
 				011F2EFA2A67BB8F00ADD3B4 /* BaggageReportSearchVC.swift in Sources */,
 				019438782A67FEB3009A5FBB /* BillRegisterVC.swift in Sources */,
@@ -593,6 +672,7 @@
 				01B2A08D2A617B5D00D03825 /* ViewController.swift in Sources */,
 				01E9036D2A696DBF00F6560F /* BaggageReportSearchDataTVCell.swift in Sources */,
 				01DFA66B2A6FE0B800710974 /* LoadRevenueProduct.swift in Sources */,
+				017E5B772A78E0AC00F26197 /* CustomerDetailsVC.swift in Sources */,
 				01FE2A802A738690004D636A /* BillRegisterConsigner.swift in Sources */,
 				01C250092A727602008587B9 /* WayBillReportData.swift in Sources */,
 				011F2F332A67C03800ADD3B4 /* TabsPageViewController.swift in Sources */,
@@ -606,6 +686,7 @@
 				01D3EB7A2A6FAFE600AF271D /* LoadRevenueBranch.swift in Sources */,
 				01B2A0892A617B5C00D03825 /* AppDelegate.swift in Sources */,
 				01DFA6612A6FB4B000710974 /* LoadRevenueOpBranch.swift in Sources */,
+				01C7C5FE2A7906A900E21A2B /* TrackReportVC.swift in Sources */,
 				01DFA6632A6FD21C00710974 /* LoadRevenueArea.swift in Sources */,
 				01CF8B242A714A4E00A37081 /* WayBillProduct.swift in Sources */,
 				01E903662A6944BD00F6560F /* ManifestSearchDataVC.swift in Sources */,
@@ -625,6 +706,7 @@
 				011F2F3D2A67C26000ADD3B4 /* DynamicHeightCollectionView.swift in Sources */,
 				011B7B742A69348E002A3474 /* ManifestNumberHelpVC.swift in Sources */,
 				014411782A6EC64D00D839AF /* BaggageListData.swift in Sources */,
+				01B1621C2A7929E600DD7436 /* ImageCardView.swift in Sources */,
 				011F2F2C2A67C03800ADD3B4 /* DateTimePickerVC.swift in Sources */,
 				01DFA6652A6FD75F00710974 /* LoadRevenueConsignor.swift in Sources */,
 				011F2F272A67C03800ADD3B4 /* GrowingTextView.swift in Sources */,
@@ -645,7 +727,9 @@
 				011F2F362A67C03800ADD3B4 /* CustomAlertDialogVC.swift in Sources */,
 				01131C632A6AB9B4006D5A70 /* ManiFestStatus.swift in Sources */,
 				01131C612A6AB941006D5A70 /* ManiFestDestination.swift in Sources */,
+				01B1621A2A79215200DD7436 /* ProfileVC.swift in Sources */,
 				01C2500B2A72923F008587B9 /* WayBillReportDataWebView.swift in Sources */,
+				0123B9142A791B4D0014B163 /* TrackingReportWebViewVC.swift in Sources */,
 				011F2F352A67C03800ADD3B4 /* Validation.swift in Sources */,
 				01B2A0A92A617E6500D03825 /* ReportsVC.swift in Sources */,
 				0182552C2A7252720073DC59 /* WayBillReportVC.swift in Sources */,

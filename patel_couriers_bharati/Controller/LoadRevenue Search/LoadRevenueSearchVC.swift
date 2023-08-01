@@ -43,7 +43,8 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
     var loadRevenueProductArr: Array = [LoadRevenueProduct]()
     var loadRevenuePaymentTypeArr: Array = [LoadRevenuePaymentType]()
     var loadRevenueDestinationArr: Array = [LoadRevenueDestination]()
-   
+    var loadRevenueGroupCriteriaArr: Array = ["Branch","Consignor","Carrier Vendor","Destination","Payment Type","Transport Type","Route","Associate & Sundry Wise","Date Wise"]
+    
     var divisionId = "0"
     var regionId = "0"
     var areaId = "0"
@@ -60,7 +61,8 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
     var productname = ""
     var paymentmodeid = "0"
     var paymentmode = ""
-    var selectedReportCriteria = "Only Load"
+    var selectedReportCriteria = "2"
+    var groupCriteria = "2"
     
     var pick_type_start_date = 1, pick_type_end_date = 2
     var startDate = Date()
@@ -86,7 +88,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         ddProduct.mainParentView = self.view
         ddPaymentType.mainParentView = self.view
         ddConsignorGroup.mainParentView = self.view
-       
+        
         //Division
         ddDivision.didSelect(completion: { (selected, index, id) in
             self.divisionId = self.loadRevenueDivisionArr[index].divisionId
@@ -112,7 +114,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
             self.API_getBranchDropDown(areaId: self.areaId)
             self.ddBranch.isUserInteractionEnabled = true
             self.ddBranch.dropdownColor = .white
-      
+            
         })
         //Branch
         ddBranch.didSelect(completion: { (selected, index, id) in
@@ -155,11 +157,28 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
             self.paymentmode = selected
         })
         //Destinastin
+       
         //Payment type
         ddDestination.didSelect(completion: { (selected, index, id) in
             self.destinationId = self.loadRevenueDestinationArr[index].opBranchId
         })
         
+        //Group Criteria
+        ddConsignorGroup.didSelect(completion: { (selected, index, id) in
+            self.groupCriteria = String (index + 1)
+        })
+        
+        setRadioBtnImage()
+        
+        API_getDevisionDropDown()
+        API_getsearchCriteriaDropDown()
+        API_getCarrierVendorDropDown()
+        get_ConsignorGroupDropdown()
+        disableDropdowns()
+        
+        
+    }
+    func setRadioBtnImage(){
         selectedRadioImage = UIImage(systemName: "circle.inset.filled")
         unSelectedRadioImage = UIImage(systemName: "circle")
         
@@ -173,19 +192,11 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         
         btnOnlyLoadRadio.setImage(selectedRadioImage, for: .selected)
         btnOnlyLoadRadio.setImage(unSelectedRadioImage, for: .normal)
-        
-        API_getDevisionDropDown()
-        API_getsearchCriteriaDropDown()
-        API_getCarrierVendorDropDown()
-        get_ConsignorGroupDropdown()
-         disableDropdowns()
-      
-        
     }
     func disableDropdowns(){
         self.ddRegion.isUserInteractionEnabled = false
         self.ddRegion.dropdownColor = dropdownBackgroundColor
-       
+        
         self.ddArea.isUserInteractionEnabled = false
         self.ddArea.dropdownColor = dropdownBackgroundColor
         
@@ -243,7 +254,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         
         sender.isSelected = true
         btnOnlyLoadRadio.isSelected = false
-        selectedReportCriteria = "Load Revenue"
+        selectedReportCriteria = "1"
         // Set the images for the selected and normal states
         btnLoadRevenueRadio.setImage(selectedRadioImage, for: .selected)
         btnLoadRevenueRadio.setImage(unSelectedRadioImage, for: .normal)
@@ -255,12 +266,11 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         
         sender.isSelected = true
         btnLoadRevenueRadio.isSelected = false
-        selectedReportCriteria = "Only Load "
+        selectedReportCriteria = "2"
         // Set the images for the selected and normal states
         btnOnlyLoadRadio.setImage(selectedRadioImage, for: .selected)
         btnOnlyLoadRadio.setImage(unSelectedRadioImage, for: .normal)
         print("Selected Option: \(selectedReportCriteria)")
-        
         
     }
     
@@ -287,8 +297,10 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         loadRevenueReportVC.destinationId = destinationId
         loadRevenueReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
         loadRevenueReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-       self.navigationController?.pushViewController(loadRevenueReportVC, animated: true)
-     
+        loadRevenueReportVC.valueRadio = groupCriteria
+        loadRevenueReportVC.groupCriteria = selectedReportCriteria
+        self.navigationController?.pushViewController(loadRevenueReportVC, animated: true)
+        
     }
     func API_getDevisionDropDown(){
         // self.mainView.isHidden = true
@@ -311,7 +323,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
             }else{
                 let reason: String = json["message"].stringValue
                 self.popupAlert(title: nil, message: reason, actions: nil)
-               
+                
             }
             self.mainView.isHidden = false
         }
@@ -342,7 +354,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
                 self.popupAlert(title: nil, message: reason, actions: nil)
                 self.ddRegion.isUserInteractionEnabled = false
                 self.ddRegion.backgroundColor = self.dropdownBackgroundColor
-               
+                
             }
             self.mainView.isHidden = false
         }
@@ -404,7 +416,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
                 self.popupAlert(title: nil, message: reason, actions: nil)
                 self.ddBranch.isUserInteractionEnabled = false
                 self.ddBranch.backgroundColor = self.dropdownBackgroundColor
-               
+                
             }
             self.mainView.isHidden = false
         }
@@ -470,7 +482,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
                     self.loadRevenueDestinationArr.append(LoadRevenueDestination(json: arr))
                     self.ddDestination.optionArray.append(arr["opBranchName"].stringValue)
                 }
-               
+                
                 let servicemodel = response["servicemodel"]
                 for arr in servicemodel.arrayValue{
                     self.loadRevenueServiceArr.append(LoadRevenueService(json: arr))
@@ -525,7 +537,7 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         }
     }
     func get_ConsignorGroupDropdown(){
-        ddConsignorGroup.optionArray = ["Branch","Consignor","Carrier Vendor","Destination","Payment Type","Transport Type","Route","Associate & Sundry Wise","Date Wise"]
+        ddConsignorGroup.optionArray = self.loadRevenueGroupCriteriaArr
         
     }
 }
