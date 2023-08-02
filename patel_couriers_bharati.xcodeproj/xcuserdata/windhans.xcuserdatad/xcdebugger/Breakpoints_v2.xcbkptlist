@@ -110,8 +110,8 @@
             filePath = "patel_couriers_bharati/Controller/WayBill Report Search/WayBillReportSearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "groupOnConsignorActionTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "patel_couriers_bharati/Controller/WayBill Report Search/WayBillReportSearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
             landmarkName = "groupOnConsignorActionTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "patel_couriers_bharati/Controller/WayBill Report Search/WayBillReportSearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
             landmarkName = "API_getConsigneronGroupSelectionDropDown()"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,8 +222,8 @@
             filePath = "patel_couriers_bharati/Controller/WayBill Report Search/WayBillReportSearchVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "disableDropdowns()"
             landmarkType = "7">
          </BreakpointContent>
@@ -232,7 +232,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B410E05A-1E56-48EF-B510-750ED55EB3CA"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "patel_couriers_bharati/Controller/Bill Register/BillRegisterVC.swift"
@@ -271,7 +271,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "109"
                   endingLineNumber = "109"
-                  offsetFromSymbolStart = "85">
+                  offsetFromSymbolStart = "72">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -382,6 +382,102 @@
                   offsetFromSymbolStart = "1171">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CD363350-0335-47DB-B179-3B081B1A8D1D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "patel_couriers_bharati/Controller/Bill Register/BillRegisterReportVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "API_getBillRegisterReportWebView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C07A4CB0-4497-4BC5-99E5-F3FF7535CEB6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "patel_couriers_bharati/Controller/Bill Register/BillRegisterReportVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "API_getBillRegisterReportWebView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "104C7A2B-70C1-4D9C-8A56-7A33C1CA7074"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "patel_couriers_bharati/Controller/Bill Register/BillRegisterReportVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "API_getBillRegisterReportWebView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "104C7A2B-70C1-4D9C-8A56-7A33C1CA7074 - a1476ae5180f97a2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in patel_couriers_bharati.BillRegisterReportVC.API_getBillRegisterReportWebView() -&gt; ()"
+                  moduleName = "patel_couriers_bharati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/windhans/Documents/WindHansTaskBharati/IOS%20Projects/Test%20/patel_couriers_bharati/patel_couriers_bharati/Controller/Bill%20Register/BillRegisterReportVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "540">
+               </Location>
+               <Location
+                  uuid = "104C7A2B-70C1-4D9C-8A56-7A33C1CA7074 - bc7c186a2d9f2217"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;) -&gt; () in closure #1 @Swift.MainActor () -&gt; () in patel_couriers_bharati.BillRegisterReportVC.API_getBillRegisterReportWebView() -&gt; ()"
+                  moduleName = "patel_couriers_bharati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/windhans/Documents/WindHansTaskBharati/IOS%20Projects/Test%20/patel_couriers_bharati/patel_couriers_bharati/Controller/Bill%20Register/BillRegisterReportVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "94"
+                  endingLineNumber = "94"
+                  offsetFromSymbolStart = "171">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52B2B174-451C-41C4-A85C-196CE4689216"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "patel_couriers_bharati/Controller/Bill Register/BillRegisterReportVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "API_getBillRegisterReportWebView()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

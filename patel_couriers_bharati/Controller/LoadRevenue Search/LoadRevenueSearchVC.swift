@@ -295,8 +295,8 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
         loadRevenueReportVC.areaId = areaId
         loadRevenueReportVC.opBranchId = opBranchId
         loadRevenueReportVC.destinationId = destinationId
-        loadRevenueReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-        loadRevenueReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+        loadRevenueReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
+        loadRevenueReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
         loadRevenueReportVC.valueRadio = groupCriteria
         loadRevenueReportVC.groupCriteria = selectedReportCriteria
         self.navigationController?.pushViewController(loadRevenueReportVC, animated: true)

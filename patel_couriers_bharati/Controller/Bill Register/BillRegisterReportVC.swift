@@ -39,18 +39,18 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
         LoadingOverlay.shared.showOverlay()
         var parameters = [String:Any]()
         
-        parameters["divisionId"] = divisionId
-        parameters["regionId"] = regionId
-        parameters["areaId"] = areaId
+        parameters["divisionId"] = 7 //(divisionId != "") ? divisionId : "0"
+        parameters["regionId"] = (regionId != "") ? regionId : "0"
+        parameters["areaId"] = (areaId != "") ? areaId : "0"
         parameters["branchId"] = (branchId != "") ? branchId : "0"
         parameters["opBranchId"] = (opBranchId != "") ? opBranchId : "0"
         parameters["consignorId"] = (consignorId != "") ? consignorId : "0"
         parameters["groupId"] = (groupId != "") ? groupId : "0"
         parameters["status"] = (statusId != "") ? statusId : "0"
-        parameters["cnType"] = (cnType != "") ? cnType : "null"
+        parameters["cnType"] = (cnType != "") ? cnType : ""
         parameters["fromDate"] = fromDate
         parameters["toDate"] = toDate
-        parameters["originId"] = 46
+        parameters["originId"] = 0
         parameters["userId"] = 61
         parameters["typeIdCheck"] = 1 // unknown is this branchttype id Check?
       
@@ -66,7 +66,7 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
                 let response = json["response"]
                 let reportOutput = response["reportOutput"]
                 self.billRegisterReportDataArray.append(BillRegisterReportData(json: reportOutput))
-                self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
+                //self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
                 self.downloadParameters = response["downloadParameters"].stringValue
                 self.API_getBillRegisterReportWebView()
             }else{
@@ -80,57 +80,45 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
     @IBAction func btnDownloadTap(_ sender: Any) {
     }
     
-    func API_getBillRegisterReportWebView(){
-        // self.mainView.isHidden = true
-        if noInternet(){return}
-        //LoadingOverlay.shared.showOverlay()
-        var parameters = [String:Any]()
- 
-        let url = MyConfig.BILL_REGISTER_REPORT_WEBVIEW + "?parameter=\(downloadParameters)"
-        
-        URL_Session.shared.postData(viewController: self, url: url, parameters: parameters ){ data in
-            
-            LoadingOverlay.shared.hideOverlayView()
-            
-            let json = JSON(data as Any)
-            let result: Bool = json["isSuccess"].boolValue
-            
-            if result {
+    func API_getBillRegisterReportWebView() {
+       
+                // self.mainView.isHidden = true
+            if self.noInternet() { return }
+                //LoadingOverlay.shared.showOverlay()
+                var parameters = [String:Any]()
+                
+            let url = MyConfig.BILL_REGISTER_REPORT_WEBVIEW + "?parameter=\(self.downloadParameters)"
+                
+                URL_Session.shared.getData(viewController: self, url: url, parameters: parameters ){ data in
+                    
+                    LoadingOverlay.shared.hideOverlayView()
+                    
+                    
+                    let json = JSON(data as Any)
+                    print("response is \(json)")
+                    let result: Bool = json["isSuccess"].boolValue
+                    
+                    if result {
                         let response = json["response"]
-                        let reportOutput = response["reportOutput"]
+                        
+                        self.billRegisterReportWebViewArray.append(BillRegisterReportWebView(json: response))
+                        let downloadFilePath = response["downloadFilePath"].stringValue
 
-                    if reportOutput.isEmpty{
-                            // Handle the case when no records are found
-                            let reason: String = "Record(s) not found for selected search criteria."
-                            self.popupAlert(title: nil, message: reason, actions: nil)
-                        } else {
-                            // Records found, load the WebView
-                            self.billRegisterReportWebViewArray.append(BillRegisterReportWebView(json: reportOutput))
-                            self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
-//                                let downloadFilePath = response["downloadFilePath"].stringValue
-//
-//                                // Fetch PDF data from the server using the downloadFilePath
-//                                guard let pdfURL = URL(string: downloadFilePath) else {
-//                                    self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
-//                                    return
-//                                }
-//                                let request = URLRequest(url: pdfURL)
-//                                self.webView.load(request)
+                        // Fetch PDF data from the server using the downloadFilePath
+                        guard let pdfURL = URL(string: downloadFilePath) else {
+                            self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
+                            return
                         }
-                   }
-            //else {
-//                        let reason: String = "Record(s) not found for selected search criteria."
-//                        self.popupAlert(title: nil, message: reason, actions: nil)
-//                    }
 
-            }
-    }
-    
-//    func showEmptyRecordMessage(_ message: String) {
-//        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        self.present(alertController, animated: true, completion: nil)
-//    }
+                        let request = URLRequest(url: pdfURL)
+                        self.webView.load(request)
+                    } else {
+                        let reason: String = "Record(s) not found for selected search criteria."
+                        self.popupAlert(title: nil, message: reason, actions: nil)
+                    }
+                }
+        }
+
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
            print("Start to load")
        }

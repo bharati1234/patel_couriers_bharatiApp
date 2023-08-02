@@ -37,13 +37,22 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
         LoadingOverlay.shared.showOverlay()
         var parameters = [String:Any]()
         
-        parameters["sort"] = "WBNO"//(sort != "") ? sort : "" // In option array string is WayBillNo
-        parameters["reportType"] = "Branch" //(reportType != "") ? reportType : ""
+        parameters["sort"] = (sort != "") ? sort : "WaybillStatus" /* In option array string is Status = WaybillStatus
+                                                                    Customer = Description
+                                                                    Carrier = RouteCodesss
+                                                                    Destination = OpBranch
+                                                                    WaybillNo = WBNO
+                                                                    WaybillDate = BookDate*/
+
+         parameters["reportType"] = (reportType != "") ? reportType : "Consignor" /*For reportType in Request
+                                                                                        Branch = Branch
+                                                                                    Customer = Consignor
+                                                                                   Carrier = Carrier*/
         parameters["divisionId"] =  (divisionId != "") ? divisionId : "0" //7
         parameters["regionId"] = (regionId != "") ? regionId : "0"  //22
         parameters["areaId"] =  (areaId != "") ? areaId : "0" //18
-        parameters["branchId"] = 29 // constant
-        parameters["opBranchId"] = 46 // constant
+        parameters["branchId"] = (branchId != "") ? branchId : "0" // 29
+        parameters["opBranchId"] = (opBranchId != "") ? opBranchId : "0"  // 46
         parameters["serviceId"] = (serviceId != "") ? serviceId : "0"
         parameters["productId"] = (productId != "") ? productId : "0"
         parameters["payTypeId"] = (payTypeId != "") ? payTypeId : "0"
@@ -58,13 +67,13 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
         parameters["typeId"] = (typeId != "") ? typeId : "0"
         parameters["searchOn"] = (searchOn != "") ? searchOn : "0"
         parameters["userId"] = 61
-        parameters["groupId"] = (groupId != "") ? groupId : "0"
+        parameters["groupId"] = (groupId != "") ? groupId : "0" // If group on consignor is checked = 1 Unchecked = 0
         parameters["fromWaybill"] = (fromWaybill != "") ? fromWaybill : ""
         parameters["toWaybill"] = (toWaybill != "") ? toWaybill : ""
         parameters["opBrachName"] = (opBrachName != "") ? opBrachName : ""
-        parameters["valueRadio"] = 1 // unknown parameter
-        parameters["reportCriteria"] = 1 // unknown prameter
-        parameters["groupConsignor"] = 1
+        parameters["valueRadio"] = (valueRadio != "") ? valueRadio : "1"   // valueRadio = Group Criteria section in UI
+        parameters["reportCriteria"] = (reportCriteria != "") ? reportCriteria : "1"  // reportCriteria = Report Type Section in UI
+        parameters["groupConsignor"] = (groupConsignor != "") ? groupConsignor : "0"   // If group on consignor is checked = 1 Unchecked = 0
       
         URL_Session.shared.postData(viewController: self, url: MyConfig.WAYBILL_REPORT, parameters: parameters ){ data in
             
@@ -77,7 +86,7 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
                 let response = json["response"]
                 let reportOutput = response["reportOutput"]
                 self.wayBillReportDataArray.append(WayBillReportData(json: reportOutput))
-                self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
+                //self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
                 self.downloadParameters = response["downloadParameters"].stringValue
                 self.API_getWayBillReportWebView()
             }else{
@@ -97,7 +106,7 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
  
         let url = MyConfig.WAYBILL_REPORT_WEBVIEW + "?parameter=\(downloadParameters)"
         
-        URL_Session.shared.postData(viewController: self, url: url, parameters: parameters ){ data in
+        URL_Session.shared.getData(viewController: self, url: url, parameters: parameters ){ data in
             
             LoadingOverlay.shared.hideOverlayView()
             
@@ -106,26 +115,17 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
             
             if result {
                         let response = json["response"]
-                        let reportOutput = response["reportOutput"]
-
-//                        if reportOutput.isEmpty {
-//                            // Handle the case when no records are found
-//                            let message = "Record(s) not found for selected search criteria."
-//                            self.showEmptyRecordMessage(message)
-//                        } else {
-                            // Records found, load the WebView
-                            self.wayBillReportDataWebviewArray.append(WayBillReportDataWebView(json: reportOutput))
-                           // self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
-                                let downloadFilePath = response["downloadFilePath"].stringValue
+                            self.wayBillReportDataWebviewArray.append(WayBillReportDataWebView(json: response))
+                                
+                        let downloadFilePath = response["downloadFilePath"].stringValue
                 
-                                // Fetch PDF data from the server using the downloadFilePath
-                                guard let pdfURL = URL(string: downloadFilePath) else {
-                                    self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
-                                    return
-                                }
-                                let request = URLRequest(url: pdfURL)
-                                self.webView.load(request)
-                       // }
+                        // Fetch PDF data from the server using the downloadFilePath
+                        guard let pdfURL = URL(string: downloadFilePath) else {
+                            self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
+                            return
+                        }
+                        let request = URLRequest(url: pdfURL)
+                        self.webView.load(request)
                     } else {
                         let reason: String = "Record(s) not found for selected search criteria."
                         self.popupAlert(title: nil, message: reason, actions: nil)
@@ -133,12 +133,7 @@ class WayBillReportVC: UIViewController,WKNavigationDelegate{
 
                 }
     }
-    
-//    func showEmptyRecordMessage(_ message: String) {
-//        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-//        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        self.present(alertController, animated: true, completion: nil)
-//    }
+  
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
            print("Start to load")
        }

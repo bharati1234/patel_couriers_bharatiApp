@@ -526,12 +526,26 @@ import UIKit
             addGesture()
         }
     }
+     
      // Add this property to store the desired dropdown color
      @IBInspectable  public  var dropdownColor: UIColor = .white {
              didSet {
                  //  update the arrow color here if needed
                
                  self.backgroundColor = dropdownColor
+             }
+         }
+     // Override isUserInteractionEnabled property
+         override public var isUserInteractionEnabled: Bool {
+             didSet {
+                 arrow.alpha = isUserInteractionEnabled ? 1.0 : 0.3
+             }
+         }
+     // Add the arrowTintColor property observer
+     @IBInspectable public var arrowTintColor = UIColor(red: 8/255.0, green: 4/255.0, blue: 132/255.0, alpha: 1.0) {
+             didSet {
+                 // Update the arrow's tint color
+                 arrow.tintColor = arrowTintColor
              }
          }
      
@@ -940,48 +954,45 @@ enum Position {
     case up
 }
 
+
+// arrow class updated code to change the arrow tint color
 class Arrow: UIView {
 
-
     var position: Position = .down {
-        didSet{
+        didSet {
             switch position {
             case .left:
                 self.transform = CGAffineTransform(rotationAngle: -CGFloat.pi/2)
-                break
-
             case .down:
                 self.transform = CGAffineTransform(rotationAngle: CGFloat.pi*2)
-                break
-
             case .right:
                 self.transform = CGAffineTransform(rotationAngle: CGFloat.pi/2)
-                break
-
             case .up:
                 self.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-                break
             }
         }
     }
 
+    var arrowTintColor: UIColor = UIColor(red: 8/255.0, green: 4/255.0, blue: 132/255.0, alpha: 1.0)  {
+        didSet {
+            arrowShapeLayer.fillColor = arrowTintColor.cgColor
+        }
+    }
+
+    private let arrowShapeLayer = CAShapeLayer()
+
     init(origin: CGPoint, size: CGFloat) {
         super.init(frame: CGRect(x: origin.x, y: origin.y, width: size, height: size))
+        setupArrow()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func draw(_ rect: CGRect) {
-
-        // Get size
+    private func setupArrow() {
         let size = self.layer.frame.width
-
-        // Create path
         let bezierPath = UIBezierPath()
-
-        // Draw points
         let qSize = size/4
 
         bezierPath.move(to: CGPoint(x: 0, y: qSize))
@@ -990,16 +1001,10 @@ class Arrow: UIView {
         bezierPath.addLine(to: CGPoint(x: 0, y: qSize))
         bezierPath.close()
 
-        // Mask to path
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = bezierPath.cgPath
-        if #available(iOS 12.0, *) {
-        self.layer.addSublayer (shapeLayer)
-        } else {
-         self.layer.mask = shapeLayer
-        }
+        arrowShapeLayer.path = bezierPath.cgPath
+        arrowShapeLayer.fillColor = arrowTintColor.cgColor
+        self.layer.addSublayer(arrowShapeLayer)
     }
-
 }
 
 extension UIView {

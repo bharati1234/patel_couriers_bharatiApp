@@ -26,14 +26,14 @@ extension UITextField {
             return self.doneAccessory
             //return true
         }
-       /* set (hasDone) {
-            if hasDone{
-                addDoneButtonOnKeyboard()
-            }
-        }*/
+        /* set (hasDone) {
+         if hasDone{
+         addDoneButtonOnKeyboard()
+         }
+         }*/
         set {
-                //addDoneButtonOnKeyboard()
-            }
+            //addDoneButtonOnKeyboard()
+        }
     }
     
     func addDoneButtonOnKeyboard()
@@ -73,9 +73,9 @@ extension UITextField {
     
     @objc func checkMaxLength(textField: UITextField) {
         guard let prospectiveText = self.text,
-            prospectiveText.count > maxLength
-            else {
-                return
+              prospectiveText.count > maxLength
+        else {
+            return
         }
         
         let selection = selectedTextRange
@@ -87,69 +87,69 @@ extension UITextField {
         selectedTextRange = selection
     }
 }
- class DTTextField: DesignableTextField, UITextFieldDelegate {
+class DTTextField: DesignableTextField, UITextFieldDelegate {
     
     //<--------start bottom border---------->
- /*   @IBInspectable open var lineColor : UIColor = UIColor.black {
-        didSet{
-            dtLayer.borderColor = lineColor.cgColor
-        }
-    }
-    
-    @IBInspectable open var selectedLineColor : UIColor = UIColor.black {
-        didSet{
-        }
-    }
-    
-    
-    @IBInspectable open var lineHeight : CGFloat = CGFloat(1.0) {
-        didSet{
-            dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
-        }
-    }
-    
-   /* required init?(coder aDecoder: (NSCoder?)) {
-        super.init(coder: aDecoder!)
-        self.delegate=self;
-        dtLayer.borderColor = lineColor.cgColor
-        self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
-                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        
-        
-        dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
-        dtLayer.borderWidth = lineHeight
-        self.layer.addSublayer(dtLayer)
-        self.layer.masksToBounds = true
-    }*/
-    
-    
-    override public func draw(_ rect: CGRect) {
-        dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
-    }
-    
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
-        self.delegate = self
-    }
-    
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        dtLayer.borderColor = selectedLineColor.cgColor
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        dtLayer.borderColor = lineColor.cgColor
-    }*/
+    /*   @IBInspectable open var lineColor : UIColor = UIColor.black {
+     didSet{
+     dtLayer.borderColor = lineColor.cgColor
+     }
+     }
+     
+     @IBInspectable open var selectedLineColor : UIColor = UIColor.black {
+     didSet{
+     }
+     }
+     
+     
+     @IBInspectable open var lineHeight : CGFloat = CGFloat(1.0) {
+     didSet{
+     dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
+     }
+     }
+     
+     /* required init?(coder aDecoder: (NSCoder?)) {
+      super.init(coder: aDecoder!)
+      self.delegate=self;
+      dtLayer.borderColor = lineColor.cgColor
+      self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
+      attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+      
+      
+      dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
+      dtLayer.borderWidth = lineHeight
+      self.layer.addSublayer(dtLayer)
+      self.layer.masksToBounds = true
+      }*/
+     
+     
+     override public func draw(_ rect: CGRect) {
+     dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
+     }
+     
+     override public func awakeFromNib() {
+     super.awakeFromNib()
+     dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
+     self.delegate = self
+     }
+     
+     public func textFieldDidBeginEditing(_ textField: UITextField) {
+     dtLayer.borderColor = selectedLineColor.cgColor
+     }
+     
+     public func textFieldDidEndEditing(_ textField: UITextField) {
+     dtLayer.borderColor = lineColor.cgColor
+     }*/
     //<--------end bottom border---------->
     
     
     /*@IBInspectable var localisedKey: String? {
-        didSet {
-            guard let key = localisedKey else { return }
-            //text = NSLocalizedString(key, comment: "")
-            placeholder = localisedKey?.localizableString(loc: Pref.getPref(key: Constants.shared.LANGUAGE) as! String)
-        }
-    }*/
+     didSet {
+     guard let key = localisedKey else { return }
+     //text = NSLocalizedString(key, comment: "")
+     placeholder = localisedKey?.localizableString(loc: Pref.getPref(key: Constants.shared.LANGUAGE) as! String)
+     }
+     }*/
     
     @IBInspectable var placeholderPadding: Int = 22 //10
     @IBInspectable var placeholderAlpha: Double = 1.0 //0.0
@@ -174,25 +174,25 @@ extension UITextField {
     fileprivate let paddingHeight:CGFloat                   = 5.0
     
     public var dtLayer:CALayer                              = CALayer()
-     public var floatPlaceholderColor:UIColor                = .darkGray //UIColor(rgb: ConstColors.TextFieldHeaderColor)
-     public var floatPlaceholderActiveColor:UIColor          = .darkGray //UIColor(rgb: ConstColors.TextFieldHeaderColor)
+    public var floatPlaceholderColor:UIColor                = .darkGray //UIColor(rgb: ConstColors.TextFieldHeaderColor)
+    public var floatPlaceholderActiveColor:UIColor          = .darkGray //UIColor(rgb: ConstColors.TextFieldHeaderColor)
     public var floatingLabelShowAnimationDuration           = 0.3
     public var floatingDisplayStatus:FloatingDisplayStatus  = .defaults
     
-
+    
     public var dtborderStyle:DTBorderStyle = .sqare{
         didSet{
             switch dtborderStyle {
             case .none:
-              /*  self.delegate=self;
-                dtLayer.borderColor = lineColor.cgColor
-                self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
-                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-                
-                dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
-                dtLayer.borderWidth = lineHeight
-                self.layer.addSublayer(dtLayer)
-                self.layer.masksToBounds = true*/
+                /*  self.delegate=self;
+                 dtLayer.borderColor = lineColor.cgColor
+                 self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "",
+                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                 
+                 dtLayer.frame = CGRect(x: 0, y: self.frame.size.height - lineHeight, width:  self.frame.size.width, height: self.frame.size.height)
+                 dtLayer.borderWidth = lineHeight
+                 self.layer.addSublayer(dtLayer)
+                 self.layer.masksToBounds = true*/
                 
                 dtLayer.cornerRadius        = 0.0
                 dtLayer.borderWidth         = 0.0
@@ -334,8 +334,8 @@ extension UITextField {
             
         }
     }
-
-
+    
+    
     override public var attributedPlaceholder: NSAttributedString?{
         didSet{ lblFloatPlaceholder.text = placeholderFinal }
     }
@@ -483,9 +483,9 @@ extension UITextField {
                            delay: 0.0,
                            options: [.beginFromCurrentState,.curveEaseOut],
                            animations: animations){ status in
-                            DispatchQueue.main.async {
-                                self.layoutIfNeeded()
-                            }
+                DispatchQueue.main.async {
+                    self.layoutIfNeeded()
+                }
             }
         }else{
             animations()
@@ -516,9 +516,9 @@ extension UITextField {
                            delay: 0.0,
                            options: [.beginFromCurrentState,.curveEaseOut],
                            animations: animations){ status in
-                            DispatchQueue.main.async {
-                                self.layoutIfNeeded()
-                            }
+                DispatchQueue.main.async {
+                    self.layoutIfNeeded()
+                }
             }
         }else{
             animations()
@@ -581,12 +581,12 @@ extension UITextField {
     }
     
     let padding = UIEdgeInsets(top: -5, left: 8, bottom: -5, right: 0);
-
+    
     public override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-            return bounds.inset(by: padding)
+        return bounds.inset(by: padding)
         //let rect = super.editingRect(forBounds: bounds)
         //return insetRectForBounds(rect: rect)
-        }
+    }
     override public func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)
         //let rect = super.textRect(forBounds: bounds)
@@ -607,15 +607,15 @@ extension UITextField {
         return rect
     }
     
-   /* override public func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.leftViewRect(forBounds: bounds)
-        return insetForSideView(forBounds: rect)
-    }
-    
-    override public func rightViewRect(forBounds bounds: CGRect) -> CGRect {
-        let rect = super.rightViewRect(forBounds: bounds)
-        return insetForSideView(forBounds: rect)
-    }*/
+    /* override public func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+     let rect = super.leftViewRect(forBounds: bounds)
+     return insetForSideView(forBounds: rect)
+     }
+     
+     override public func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+     let rect = super.rightViewRect(forBounds: bounds)
+     return insetForSideView(forBounds: rect)
+     }*/
     
     override public func clearButtonRect(forBounds bounds: CGRect) -> CGRect {
         var rect = super.clearButtonRect(forBounds: bounds)
@@ -647,7 +647,7 @@ extension UITextField {
         let floatingLabelSize = lblFloatPlaceholder.sizeThatFits(lblFloatPlaceholder.superview!.bounds.size)
         
         lblFloatPlaceholder.frame = CGRect(x: x, y: lblFloatPlaceholder.frame.origin.y,width: floatingLabelSize.width,height: floatingLabelSize.height)
-       
+        
         setErrorLabelAlignment()
         setFloatLabelAlignment()
         lblFloatPlaceholder.textColor = isFirstResponder ? floatPlaceholderActiveColor : floatPlaceholderColor
@@ -659,7 +659,7 @@ extension UITextField {
             showFloatingLabel(isFirstResponder)
         default:
             if let enteredText = text,!enteredText.isEmptyStr{
-               showFloatingLabel(isFirstResponder)
+                showFloatingLabel(isFirstResponder)
             }else{
                 hideFlotingLabel(isFirstResponder)
             }
@@ -669,37 +669,38 @@ extension UITextField {
 
 @IBDesignable
 class DesignableTextField: UITextField {
-
+    
     //Delegate when image/icon is tapped.
-  /*  private var myDelegate: DesignableTextFieldDelegate? {
-        get { return delegate as? DesignableTextFieldDelegate }
-    }
-
-    @objc func buttonClicked(btn: UIButton){
-        self.myDelegate?.textFieldIconClicked(btn: btn)
-    }*/
-
+    /*  private var myDelegate: DesignableTextFieldDelegate? {
+     get { return delegate as? DesignableTextFieldDelegate }
+     }
+     
+     @objc func buttonClicked(btn: UIButton){
+     self.myDelegate?.textFieldIconClicked(btn: btn)
+     }*/
+    
     //Padding images on left
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         var textRect = super.leftViewRect(forBounds: bounds)
         textRect.origin.x -= rightPadding
         return textRect
     }
-
+    
     //Padding images on Right
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         var textRect = super.rightViewRect(forBounds: bounds)
         textRect.origin.x -= rightPadding
         return textRect
     }
-
+    
     @IBInspectable public var rightPadding: CGFloat = 10
     @IBInspectable var leadingImage: UIImage? { didSet { updateView() }}
     @IBInspectable var color: UIColor = UIColor.lightGray { didSet { updateView() }}
     @IBInspectable var imageColor: UIColor = .gray { didSet { updateView() }}
     @IBInspectable var rtl: Bool = false { didSet { updateView() }}
     
-    
+    // Property to track password visibility
+    private var isPasswordVisible = true
     
     func updateView() {
         
@@ -707,21 +708,22 @@ class DesignableTextField: UITextField {
         rightView = nil
         leftViewMode = UITextField.ViewMode.never
         leftView = nil
-
+        
         //leadingImage?.withRenderingMode(.alwaysTemplate)
         if let image = leadingImage {
             let button = UIButton(type: .system)
             button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
             
-
+            
             let tintedImage = image.withRenderingMode(.alwaysTemplate)
             button.setImage(Constants.shared.image(tintedImage, scaledToSize: CGSize(width: 20,height: 20)), for: .normal)
             button.tintColor = imageColor
-
+            
             button.setTitleColor(UIColor.clear, for: .normal)
-          //  button.addTarget(self, action: #selector(buttonClicked(btn:)), for: UIControlEvents.touchDown)
+            //  button.addTarget(self, action: #selector(buttonClicked(btn:)), for: UIControlEvents.touchDown)
+            
             button.isUserInteractionEnabled = true
-
+            
             if rtl {
                 rightViewMode = UITextField.ViewMode.always
                 rightView = button
@@ -729,10 +731,51 @@ class DesignableTextField: UITextField {
                 leftViewMode = UITextField.ViewMode.always
                 leftView = button
             }
+            
         }
-
+        
         // Placeholder text color
         attributedPlaceholder = NSAttributedString(string: placeholder != nil ?  placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: color])
     }
+    
 }
 
+extension DesignableTextField {
+    
+    private var leadingButton: UIButton? {
+        get { return self.rightView as? UIButton }
+        set { self.rightView = newValue }
+    }
+    
+    // Method to set up the eye icon for password fields
+    func setupPasswordField() {
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        let tintedImage = UIImage(systemName: "eye.fill")?.withRenderingMode(.alwaysTemplate)
+        button.setImage(tintedImage, for: .normal)
+        button.tintColor = imageColor
+        button.addTarget(self, action: #selector(eyeButtonTapped), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
+        leadingButton = button
+        rightViewMode = UITextField.ViewMode.always // Use rightViewMode to make the eye icon the leading image
+        rightView = button
+        
+        // Set the initial password visibility state
+        isPasswordVisible = true
+        
+        // Set the text field as secure initially
+        self.isSecureTextEntry = false
+        
+        
+    }
+    
+    @objc private func eyeButtonTapped() {
+        isPasswordVisible = !isPasswordVisible
+        let imageName = isPasswordVisible ? "eye.fill" : "eye.slash.fill"
+        let tintedImage = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
+        leadingButton?.setImage(tintedImage, for: .normal)
+        
+        // Update the secure text entry property
+        self.isSecureTextEntry = !isPasswordVisible
+    }
+}

@@ -77,7 +77,7 @@ class MyConfig {
     static public let WAYBILL_REPORT_SEARCH_LIST = MAIN_URL + "/WayBillTransaction/WayBillListSearch"
     
     static public let WAYBILL_REPORT = MAIN_URL + "/WayBillReport/WayBillList"
-    static public let WAYBILL_REPORT_WEBVIEW = MAIN_URL + "/WayBillReport/WayBillList"
+    static public let WAYBILL_REPORT_WEBVIEW = MAIN_URL + "/WayBillReport/DownLoadWaybillReport"
     
     //Report Bill Register
     static public let BILL_REGISTER_DIVISION_DROPDOWN = MAIN_URL + "/WayBillReport/WayBillReportGridData"
@@ -88,7 +88,7 @@ class MyConfig {
     static public let BILL_REGISTER_CONSIGNOR_DROPDOWN = MAIN_URL + "/CommonDropdown/GetBillCNRegisterDropDownListData"
     
     static public let BILL_REGISTER_REPORT = MAIN_URL + "/BillRegisterReport/BillRegisterDisplayReport"
-    static public let BILL_REGISTER_REPORT_WEBVIEW = MAIN_URL + "/BillRegisterReport/BillRegisterDisplayReport"
+    static public let BILL_REGISTER_REPORT_WEBVIEW = MAIN_URL + "BillRegisterReport/DownLoadBillRegisterReport"
     
    
 }

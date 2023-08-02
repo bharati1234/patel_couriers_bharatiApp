@@ -53,6 +53,8 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
     var wayBillDocumentTypeArr: Array = [WayBillCommonModelFromService]()
     var wayBillSearchOnArr: Array = ["Booking Date","Invoice Date"]
     var wayBillGroupCriteriaArr: Array = ["Branch","Customer","Carrier"]
+    var wayBillSortCriteriaArr: Array = ["Status","Customer","Carrier","Destination","WayBillNo","WayBillDate"]
+    var wayBillReportTypeArr: Array = ["Charge Summary","Charge Details","Monthly Charge Summary","Waybill Audited","DBS"]
    
     var selectedCheckboxImage:UIImage?
     var unSelectedCheckboxImage:UIImage?
@@ -71,16 +73,17 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
     var destinationId = "0"
     var rateCategoryId = "0"
     var statusId = "0"
-    var selectedSortCriteria = ""
-    var selectedReportType = ""
-   
+  
+    var sort = "" // SortCriteria
     var selectedSearchOnId = "0"
     var selectedDocTypeId = ""
-    var selectedGroupCriteriaId = "0"
+    
     var selectedBranchName = ""
-    var selectedReportCriteria = ""
-    var groupOnconsignor = ""
-    var selectedGroupConsignorId: Int = 0
+    var reportCriteria = "" // Report Type
+   
+    var reportType = "" // Group Criteria
+    var valueRadio = "1" // Report Type id
+    var groupOnconsignor: Int = 0
     
     let dropdownBackgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
     
@@ -191,29 +194,46 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
         
         //Sort
         ddSortCiteria.didSelect(completion: { (selected, index, id) in
-            self.selectedSortCriteria  =  selected
+            self.sort  =  selected
+            if self.sort == "Status" {
+                self.sort = "WaybillStatus"
+            }else if self.sort == "Customer" {
+                self.sort = "Description"
+            }else if self.sort == "Carrier" {
+                self.sort = "RouteCodes"
+            }else if self.sort == "Destination" {
+                self.sort = "OpBranch"
+            }else if self.sort == "WaybillNo" {
+                self.sort = "WBNO"
+            }else if self.sort == "WaybillDate" {
+                self.sort = "BookDate"
+            }
         })
         
         //Report Type
         ddReportType.didSelect(completion: { (selected, index, id) in
-            self.selectedReportType  =  selected
-            self.selectedReportCriteria = String(index)
+            self.reportCriteria = String(index + 1)
         })
+        
         //Document Type
         ddDocType.didSelect(completion: { (selected, index, id) in
-            self.selectedDocTypeId  =  String(index)
+            self.selectedDocTypeId = self.wayBillDocumentTypeArr[index].documentypeId
         })
+        
         //Search on
         ddSearchOn.didSelect(completion: { (selected, index, id) in
-           // print("Selected id:", index)
             self.selectedSearchOnId = String(index)
-            //print("Updated selectedSearchOnId:", self.selectedSearchOnId)
         })
         
         //Group Criteria
         ddGroupCriteria.didSelect(completion: { (selected, index, id) in
-            self.selectedGroupCriteriaId  =  String(index)
+            self.reportType =  selected
+            if self.reportType == "Customer" {
+                self.reportType = "Consignor"
+            }
+            self.valueRadio  =  String(index + 1)
         })
+       
         // Destination
         ddDestination.didSelect(completion: { (selected, index, id) in
             self.destinationId  =  self.wayBillDestinationArr[index].opBranchId
@@ -313,8 +333,8 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
             btnCheckboxGroupOn.setImage(selectedCheckboxImage, for: .selected)
             btnCheckboxGroupOn.setImage(unSelectedCheckboxImage, for: .normal)
             
-            selectedGroupConsignorId = sender.tag
-            if selectedGroupConsignorId == 1{
+            groupOnconsignor = sender.tag
+            if groupOnconsignor == 1{
                API_getConsigneronGroupSelectionDropDown()
             }
         
@@ -324,8 +344,8 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
     @IBAction func btnSearchTap(_ sender: Any) {
         let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Waybill",bundle: nil)
         let wayBillReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "WayBillReportVC") as! WayBillReportVC
-        wayBillReportVC.sort = self.selectedSortCriteria
-        wayBillReportVC.reportType = self.selectedReportType
+        wayBillReportVC.sort = self.sort
+        wayBillReportVC.reportType = self.reportType // Group Criteria
         wayBillReportVC.divisionId = self.divisionId
         wayBillReportVC.regionId = self.regionId
         wayBillReportVC.areaId = self.areaId
@@ -343,12 +363,13 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
         wayBillReportVC.statusId = self.statusId
         wayBillReportVC.typeId = self.selectedDocTypeId
         wayBillReportVC.searchOn = self.selectedSearchOnId
-        wayBillReportVC.groupId = self.selectedGroupCriteriaId
+        wayBillReportVC.groupId = String(self.groupOnconsignor)
         wayBillReportVC.fromWaybill = txtWBFrom.text!
         wayBillReportVC.toWaybill = txtWBTo.text!
         wayBillReportVC.opBrachName = self.selectedBranchName
-        wayBillReportVC.reportCriteria = self.selectedReportCriteria
-        wayBillReportVC.groupConsignor = String(self.selectedGroupConsignorId)
+        wayBillReportVC.valueRadio = self.valueRadio // Group Criteria index
+        wayBillReportVC.reportCriteria = self.reportCriteria // Report Type index
+        wayBillReportVC.groupConsignor = String(self.groupOnconsignor)
         self.navigationController?.pushViewController(wayBillReportVC, animated: true)
     }
     
@@ -628,9 +649,9 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
         self.ddGroupCriteria.optionArray = wayBillGroupCriteriaArr
     }
     func getSortCriteria(){
-        self.ddSortCiteria.optionArray = ["Status","Customer","Carrier","Destination","WayBillNo","WayBillDate"]
+        self.ddSortCiteria.optionArray = wayBillSortCriteriaArr
     }
     func getReportType(){
-        self.ddReportType.optionArray = ["Charge Summary","Charge Details","Monthly Charge Summary","DBS","Waybill Audited"]
+        self.ddReportType.optionArray = wayBillReportTypeArr
     }
 }

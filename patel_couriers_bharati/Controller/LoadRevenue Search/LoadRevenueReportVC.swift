@@ -45,24 +45,24 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
         parameters["paymentmode"] = (paymentmode != "") ? paymentmode : "null"
         parameters["consignorId"] = (consignorId != "") ? consignorId : "0"
         parameters["consignorName"] = (consignorName != "") ? consignorName : "null"
-        parameters["branchId"] = 29
+        parameters["branchId"] = (branchId != "") ? branchId : "0"
         parameters["branchName"] = (branchName != "") ? branchName : "null"
         parameters["carrierId"] = (carrierId != "") ? carrierId : "0"
         parameters["description"] = (desc != "") ? desc : "null" // unknown
-        parameters["divisionId"] = (divisionId != "") ? divisionId : "0"
+        parameters["divisionId"] = 7 //(divisionId != "") ? divisionId : "0"
         parameters["regionId"] = (regionId != "") ? regionId : "0"
         parameters["areaId"] = (areaId != "") ? areaId : "0"
-        parameters["opBranchId"] = 46
+        parameters["opBranchId"] = (opBranchId != "") ? opBranchId : "0"
         parameters["destinationId"] = (destinationId != "") ? destinationId : "0"
         parameters["fromDate"] = fromDate
         parameters["toDate"] = toDate
         parameters["userId"] = 61
-        parameters["valueRadio"] = (valueRadio != "") ? valueRadio : "2" // valueRadio  = GroupCriteria
-        parameters["groupCriteria"] = (groupCriteria != "") ? groupCriteria : "2"  // groupCriteria = Report Criteria Load Revenue or only Load
-        parameters["userCurrentBranchId"] = (userCurrentBranchId != "") ? userCurrentBranchId : "0" // unkonwn
+        parameters["valueRadio"] = (valueRadio != "") ? valueRadio : "1" // valueRadio  = GroupCriteria
+        parameters["groupCriteria"] = (groupCriteria != "") ? groupCriteria : "1"  // groupCriteria = Report Criteria Load Revenue or only Load
+        parameters["userCurrentBranchId"] = 29 // unkonwn
         
         
-        URL_Session.shared.postData(viewController: self, url: MyConfig.LOADREVENUE_REPORT, parameters: parameters ){ data in
+        URL_Session.shared.getData(viewController: self, url: MyConfig.LOADREVENUE_REPORT, parameters: parameters ){ data in
             
             // LoadingOverlay.shared.hideOverlayView()
             
