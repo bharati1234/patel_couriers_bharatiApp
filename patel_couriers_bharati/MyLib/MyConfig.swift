@@ -62,7 +62,7 @@ class MyConfig {
     static public let LOADREVENUE_SEARCH_CRITERIA_DROPDOWN = MAIN_URL + "/WayBillTransaction/GetAllWayBillDropdown"
     
     static public let LOADREVENUE_REPORT = MAIN_URL + "/RevenueReport/RevenueList"
-    static public let LOADREVENUE_REPORT_WEBVIEW = MAIN_URL + "/RevenueReport/RevenueList"
+    static public let LOADREVENUE_REPORT_WEBVIEW = MAIN_URL + "RevenueReport/DownloadRevenueReport"
    
     //Report Way Bill
     static public let WAYBILL_DIVISION_DROPDOWN = MAIN_URL + "/WayBillReport/WayBillReportGridData"

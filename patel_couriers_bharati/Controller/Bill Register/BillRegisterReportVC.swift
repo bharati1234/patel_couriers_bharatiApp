@@ -15,9 +15,11 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
     var billRegisterReportDataArray = [BillRegisterReportData]()
     var billRegisterReportWebViewArray = [BillRegisterReportWebView]()
     
-    var divisionId = "", regionId = "", areaId = "", branchId = "", opBranchId = ""  ,consignorId = "" ,groupId = "", statusId = "", cnType = "", fromDate = "", toDate = "", originId = "",  userId = "",  typeIdCheck = ""
+    var divisionId = "", regionId = "", areaId = "", branchId = "", opBranchId = ""  ,consignorId = "" ,groupId = "", status = "", cnType = "", fromDate = "", toDate = "", originId = "",  userId = "",  typeIdCheck = ""
+   
     
     var downloadParameters = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,20 +41,20 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
         LoadingOverlay.shared.showOverlay()
         var parameters = [String:Any]()
         
-        parameters["divisionId"] = 7 //(divisionId != "") ? divisionId : "0"
+        parameters["divisionId"] = (divisionId != "") ? divisionId : "0" // 7
         parameters["regionId"] = (regionId != "") ? regionId : "0"
         parameters["areaId"] = (areaId != "") ? areaId : "0"
         parameters["branchId"] = (branchId != "") ? branchId : "0"
         parameters["opBranchId"] = (opBranchId != "") ? opBranchId : "0"
         parameters["consignorId"] = (consignorId != "") ? consignorId : "0"
         parameters["groupId"] = (groupId != "") ? groupId : "0"
-        parameters["status"] = (statusId != "") ? statusId : "0"
-        parameters["cnType"] = (cnType != "") ? cnType : ""
+        parameters["status"] = (status != "") ? status : "0"
+        parameters["cnType"] = (cnType != "") ? cnType : "null"
         parameters["fromDate"] = fromDate
         parameters["toDate"] = toDate
         parameters["originId"] = 0
         parameters["userId"] = 61
-        parameters["typeIdCheck"] = 1 // unknown is this branchttype id Check?
+        parameters["typeIdCheck"] = (typeIdCheck != "") ? typeIdCheck : "1" //  branchttype id 
       
     
         URL_Session.shared.postData(viewController: self, url: MyConfig.BILL_REGISTER_REPORT, parameters: parameters ){ data in
@@ -88,22 +90,18 @@ class BillRegisterReportVC: UIViewController,WKNavigationDelegate {
                 var parameters = [String:Any]()
                 
             let url = MyConfig.BILL_REGISTER_REPORT_WEBVIEW + "?parameter=\(self.downloadParameters)"
-                
-                URL_Session.shared.getData(viewController: self, url: url, parameters: parameters ){ data in
+            URL_Session.shared.getData(viewController: self, url: url, parameters: parameters ){ data in
                     
                     LoadingOverlay.shared.hideOverlayView()
-                    
-                    
+              
                     let json = JSON(data as Any)
                     print("response is \(json)")
                     let result: Bool = json["isSuccess"].boolValue
                     
                     if result {
                         let response = json["response"]
-                        
                         self.billRegisterReportWebViewArray.append(BillRegisterReportWebView(json: response))
                         let downloadFilePath = response["downloadFilePath"].stringValue
-
                         // Fetch PDF data from the server using the downloadFilePath
                         guard let pdfURL = URL(string: downloadFilePath) else {
                             self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)

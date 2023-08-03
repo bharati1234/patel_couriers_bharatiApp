@@ -30,10 +30,16 @@ class BaggageReportSearchVC: UIViewController {
     }
     
     @IBAction func btnSearchByFilterTap(_ sender: Any) {
-                let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Baggage",bundle: nil)
-                let baggageReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "BaggageReportVC") as! BaggageReportVC
-                baggageReportVC.pnBrnumber = brNumber
-                self.navigationController?.pushViewController(baggageReportVC, animated: true)
+        if txtBRNumber.text == ""{
+            let reason: String = "Please Enter Baggage Report Number! "
+            self.popupAlert(title: nil, message: reason, actions: nil)
+        }else {
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Baggage",bundle: nil)
+            let baggageReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "BaggageReportVC") as! BaggageReportVC
+            baggageReportVC.pnBrnumber = brNumber
+            baggageReportVC.pnBrnumber = txtBRNumber.text!
+            self.navigationController?.pushViewController(baggageReportVC, animated: true)
+        }
     }
     
 

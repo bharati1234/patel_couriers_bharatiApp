@@ -94,7 +94,7 @@ class URL_Session {
             print("param: ", parameters)
             
     
-        var request = URLRequest(url: URL(string: url)!)
+        var request = URLRequest(url: URL(string: url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!)
         request.httpMethod = "GET"
         let postString = self.getPostString(params: parameters)
         request.httpBody = postString.data(using: .utf8)

@@ -24,7 +24,7 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "WayBill Report"
+        self.title = "Load Revenue Report"
         webView.navigationDelegate = self
         webView.scrollView.setZoomScale(5, animated: true)
         LoadingOverlay.shared.showOverlay()
@@ -46,10 +46,10 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
         parameters["consignorId"] = (consignorId != "") ? consignorId : "0"
         parameters["consignorName"] = (consignorName != "") ? consignorName : "null"
         parameters["branchId"] = (branchId != "") ? branchId : "0"
-        parameters["branchName"] = (branchName != "") ? branchName : "null"
+        parameters["branchName"] = (branchName != "") ? branchName : ""
         parameters["carrierId"] = (carrierId != "") ? carrierId : "0"
         parameters["description"] = (desc != "") ? desc : "null" // unknown
-        parameters["divisionId"] = 7 //(divisionId != "") ? divisionId : "0"
+        parameters["divisionId"] =  (divisionId != "") ? divisionId : "0"
         parameters["regionId"] = (regionId != "") ? regionId : "0"
         parameters["areaId"] = (areaId != "") ? areaId : "0"
         parameters["opBranchId"] = (opBranchId != "") ? opBranchId : "0"
@@ -62,7 +62,7 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
         parameters["userCurrentBranchId"] = 29 // unkonwn
         
         
-        URL_Session.shared.getData(viewController: self, url: MyConfig.LOADREVENUE_REPORT, parameters: parameters ){ data in
+        URL_Session.shared.postData(viewController: self, url: MyConfig.LOADREVENUE_REPORT, parameters: parameters ){ data in
             
             // LoadingOverlay.shared.hideOverlayView()
             
@@ -73,7 +73,7 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
                 let response = json["response"]
                 let reportOutput = response["reportOutput"]
                 self.loadRevenueReportDataArray.append(LoadRevenueReportData(json: reportOutput))
-                self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
+                //self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
                 self.downloadParameters = response["downloadParameters"].stringValue
                 self.API_getloadRevenueReportWebView()
             }else{
@@ -93,7 +93,7 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
         
         let url = MyConfig.LOADREVENUE_REPORT_WEBVIEW + "?parameter=\(downloadParameters)"
         
-        URL_Session.shared.postData(viewController: self, url: url, parameters: parameters ){ data in
+        URL_Session.shared.getData(viewController: self, url: url, parameters: parameters ){ data in
             
             LoadingOverlay.shared.hideOverlayView()
             
@@ -102,26 +102,17 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
             
             if result {
                 let response = json["response"]
-                let reportOutput = response["reportOutput"]
+                self.loadRevenueReportWebViewArray.append(LoadRevenueReportWebView(json: response))
                 
-                //                        if reportOutput.isEmpty {
-                //                            // Handle the case when no records are found
-                //                            let message = "Record(s) not found for selected search criteria."
-                //                            self.showEmptyRecordMessage(message)
-                //                        } else {
-                // Records found, load the WebView
-                self.loadRevenueReportWebViewArray.append(LoadRevenueReportWebView(json: reportOutput))
-                self.webView.loadHTMLString(reportOutput.stringValue, baseURL: nil)
-                // let downloadFilePath = response["downloadFilePath"].stringValue
-                //
-                ///// Fetch PDF data from the server using the downloadFilePath
-                //guard let pdfURL = URL(string: downloadFilePath) else {
-//                    self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
-//                            return
-//                        }
-//                        let request = URLRequest(url: pdfURL)
-//                    self.webView.load(request)
-                // }
+                let downloadFilePath = response["downloadFilePath"].stringValue
+                /// Fetch PDF data from the server using the downloadFilePath
+                guard let pdfURL = URL(string: downloadFilePath) else {
+                    self.popupAlert(title: nil, message: "Invalid PDF URL", actions: nil)
+                    return
+                }
+                let request = URLRequest(url: pdfURL)
+                self.webView.load(request)
+                
             } else {
                 let reason: String = "Record(s) not found for selected search criteria."
                 self.popupAlert(title: nil, message: reason, actions: nil)
@@ -130,11 +121,6 @@ class LoadRevenueReportVC: UIViewController,WKNavigationDelegate{
         }
     }
     
-    //    func showEmptyRecordMessage(_ message: String) {
-    //        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-    //        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-    //        self.present(alertController, animated: true, completion: nil)
-    //    }
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         print("Start to load")
     }

@@ -85,6 +85,8 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
     var valueRadio = "1" // Report Type id
     var groupOnconsignor: Int = 0
     
+    var isGroupConsignerSelected = false
+    
     let dropdownBackgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1.0)
     
     var pick_type_start_date = 1, pick_type_end_date = 2
@@ -176,7 +178,12 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
         })
         //Consignor
         ddConsignor.didSelect(completion: { (selected, index, id) in
-            self.consignorId = self.wayBillConsignorArr[index].consignorId
+            if !selected.isEmpty{
+                self.consignorId = self.wayBillConsignorArr[index].consignorId
+                self.isGroupConsignerSelected = true
+            }else{
+                self.isGroupConsignerSelected = false
+            }
         })
         //Route
         ddRoute.didSelect(completion: { (selected, index, id) in
@@ -336,41 +343,81 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
             groupOnconsignor = sender.tag
             if groupOnconsignor == 1{
                API_getConsigneronGroupSelectionDropDown()
+            }else {
+                API_getConsignerDropDown()
             }
         
         
     }
    
     @IBAction func btnSearchTap(_ sender: Any) {
-        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Waybill",bundle: nil)
-        let wayBillReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "WayBillReportVC") as! WayBillReportVC
-        wayBillReportVC.sort = self.sort
-        wayBillReportVC.reportType = self.reportType // Group Criteria
-        wayBillReportVC.divisionId = self.divisionId
-        wayBillReportVC.regionId = self.regionId
-        wayBillReportVC.areaId = self.areaId
-        wayBillReportVC.branchId = self.branchId
-        wayBillReportVC.opBranchId = self.opBranchId
-        wayBillReportVC.serviceId = self.serviceId
-        wayBillReportVC.productId = self.productId
-        wayBillReportVC.payTypeId = self.paymentTypeId
-        wayBillReportVC.consignorId = self.consignorId
-        wayBillReportVC.destinationId = self.destinationId
-        wayBillReportVC.routeId = self.routeId
-        wayBillReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-        wayBillReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-        wayBillReportVC.rateCategoryId = self.rateCategoryId
-        wayBillReportVC.statusId = self.statusId
-        wayBillReportVC.typeId = self.selectedDocTypeId
-        wayBillReportVC.searchOn = self.selectedSearchOnId
-        wayBillReportVC.groupId = String(self.groupOnconsignor)
-        wayBillReportVC.fromWaybill = txtWBFrom.text!
-        wayBillReportVC.toWaybill = txtWBTo.text!
-        wayBillReportVC.opBrachName = self.selectedBranchName
-        wayBillReportVC.valueRadio = self.valueRadio // Group Criteria index
-        wayBillReportVC.reportCriteria = self.reportCriteria // Report Type index
-        wayBillReportVC.groupConsignor = String(self.groupOnconsignor)
-        self.navigationController?.pushViewController(wayBillReportVC, animated: true)
+        if groupOnconsignor == 1  {
+            if isGroupConsignerSelected{
+                let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Waybill",bundle: nil)
+                let wayBillReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "WayBillReportVC") as! WayBillReportVC
+                wayBillReportVC.sort = self.sort
+                wayBillReportVC.reportType = self.reportType // Group Criteria
+                wayBillReportVC.divisionId = self.divisionId
+                wayBillReportVC.regionId = self.regionId
+                wayBillReportVC.areaId = self.areaId
+                wayBillReportVC.branchId = self.branchId
+                wayBillReportVC.opBranchId = self.opBranchId
+                wayBillReportVC.serviceId = self.serviceId
+                wayBillReportVC.productId = self.productId
+                wayBillReportVC.payTypeId = self.paymentTypeId
+                wayBillReportVC.consignorId = self.consignorId
+                wayBillReportVC.destinationId = self.destinationId
+                wayBillReportVC.routeId = self.routeId
+                wayBillReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+                wayBillReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+                wayBillReportVC.rateCategoryId = self.rateCategoryId
+                wayBillReportVC.statusId = self.statusId
+                wayBillReportVC.typeId = self.selectedDocTypeId
+                wayBillReportVC.searchOn = self.selectedSearchOnId
+                wayBillReportVC.groupId = String(self.groupOnconsignor)
+                wayBillReportVC.fromWaybill = txtWBFrom.text!
+                wayBillReportVC.toWaybill = txtWBTo.text!
+                wayBillReportVC.opBrachName = self.selectedBranchName
+                wayBillReportVC.valueRadio = self.valueRadio // Group Criteria index
+                wayBillReportVC.reportCriteria = self.reportCriteria // Report Type index
+                wayBillReportVC.groupConsignor = String(self.groupOnconsignor)
+                self.navigationController?.pushViewController(wayBillReportVC, animated: true)
+            }else{
+                let reason: String = "Please Select valid Consignor!"
+                self.popupAlert(title: nil, message: reason, actions: nil)
+            }
+        }else {
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name: "Waybill",bundle: nil)
+            let wayBillReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "WayBillReportVC") as! WayBillReportVC
+            wayBillReportVC.sort = self.sort
+            wayBillReportVC.reportType = self.reportType // Group Criteria
+            wayBillReportVC.divisionId = self.divisionId
+            wayBillReportVC.regionId = self.regionId
+            wayBillReportVC.areaId = self.areaId
+            wayBillReportVC.branchId = self.branchId
+            wayBillReportVC.opBranchId = self.opBranchId
+            wayBillReportVC.serviceId = self.serviceId
+            wayBillReportVC.productId = self.productId
+            wayBillReportVC.payTypeId = self.paymentTypeId
+            wayBillReportVC.consignorId = self.consignorId
+            wayBillReportVC.destinationId = self.destinationId
+            wayBillReportVC.routeId = self.routeId
+            wayBillReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+            wayBillReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+            wayBillReportVC.rateCategoryId = self.rateCategoryId
+            wayBillReportVC.statusId = self.statusId
+            wayBillReportVC.typeId = self.selectedDocTypeId
+            wayBillReportVC.searchOn = self.selectedSearchOnId
+            wayBillReportVC.groupId = String(self.groupOnconsignor)
+            wayBillReportVC.fromWaybill = txtWBFrom.text!
+            wayBillReportVC.toWaybill = txtWBTo.text!
+            wayBillReportVC.opBrachName = self.selectedBranchName
+            wayBillReportVC.valueRadio = self.valueRadio // Group Criteria index
+            wayBillReportVC.reportCriteria = self.reportCriteria // Report Type index
+            wayBillReportVC.groupConsignor = String(self.groupOnconsignor)
+            self.navigationController?.pushViewController(wayBillReportVC, animated: true)
+        }
+       
     }
     
     func API_getDevisionDropDown(){
@@ -609,6 +656,19 @@ class WayBillReportSearchVC: UIViewController, DateTimePickerDelegate {
             
         }
     }
+    func API_getConsignerDropDown(){
+        self.wayBillConsignorArr.removeAll()
+        self.ddConsignor.optionArray.removeAll()
+        
+        let response = response
+        
+        let consignorModel = response["rptConsignorModels"]
+        for arr in consignorModel.arrayValue{
+            self.wayBillConsignorArr.append(WayBillCommonModelFromService(json: arr))
+            self.ddConsignor.optionArray.append(arr["consignorName"].stringValue)
+        }
+    }
+    
     func API_getProductDropDown(serviceId:String){
         // self.mainView.isHidden = true
         if noInternet(){return}

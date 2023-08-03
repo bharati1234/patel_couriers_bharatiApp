@@ -61,8 +61,8 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
     var productname = ""
     var paymentmodeid = "0"
     var paymentmode = ""
-    var selectedReportCriteria = "2"
-    var groupCriteria = "2"
+    var selectedReportCriteria = ""
+    var groupCriteria = ""
     
     var pick_type_start_date = 1, pick_type_end_date = 2
     var startDate = Date()
@@ -277,29 +277,73 @@ class LoadRevenueSearchVC: UIViewController, DateTimePickerDelegate {
     // SEARCH TAP ACTION
     
     @IBAction func btnSearchTap(_ sender: Any) {
-        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "LoadRevenue",bundle: nil)
-        let loadRevenueReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "LoadRevenueReportVC") as! LoadRevenueReportVC
-        loadRevenueReportVC.serviceId = serviceId
-        loadRevenueReportVC.servicename = servicenamae
-        loadRevenueReportVC.productId = productId
-        loadRevenueReportVC.productname = productname
-        loadRevenueReportVC.paymentmodeid = paymentmodeid
-        loadRevenueReportVC.paymentmode = paymentmode
-        loadRevenueReportVC.consignorId = consignorId
-        loadRevenueReportVC.consignorName = consignorName
-        loadRevenueReportVC.branchId = branchId
-        loadRevenueReportVC.branchName = branchName
-        loadRevenueReportVC.carrierId = carrierId
-        loadRevenueReportVC.divisionId = divisionId
-        loadRevenueReportVC.regionId = regionId
-        loadRevenueReportVC.areaId = areaId
-        loadRevenueReportVC.opBranchId = opBranchId
-        loadRevenueReportVC.destinationId = destinationId
-        loadRevenueReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
-        loadRevenueReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
-        loadRevenueReportVC.valueRadio = groupCriteria
-        loadRevenueReportVC.groupCriteria = selectedReportCriteria
-        self.navigationController?.pushViewController(loadRevenueReportVC, animated: true)
+        
+        let txtfromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
+        let txttoDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
+       
+        func calculateDatesDifference(from txtfromDate: String, to txttoDate: String) -> Bool {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+
+            if let fromDateObj = dateFormatter.date(from: txtfromDate), let toDateObj = dateFormatter.date(from: txttoDate) {
+                let calendar = Calendar.current
+
+                // Calculate the difference between the dates in days
+                if let difference = calendar.dateComponents([.day], from: fromDateObj, to: toDateObj).day {
+                    if difference >= 31 {
+                        // Show alert here
+                        print("Difference is more than 31 days.")
+                        return true
+                    } else {
+                        // Difference is less than 31 days
+                        print("Difference is less than 31 days.")
+                        return false
+                    }
+                } else {
+                    // Error calculating the difference
+                    print("Error calculating difference.")
+                    return false
+                }
+            } else {
+                // Error parsing the dates
+                print("Error parsing dates.")
+                return false
+            }
+        }
+
+        let fromDate = txtfromDate
+        let toDate = txttoDate
+        let isDifferenceMoreThan31Days = calculateDatesDifference(from: fromDate, to: toDate)
+        
+        if isDifferenceMoreThan31Days {
+            let reason: String = "Sorry! Date difference can not be more than 31 days."
+            self.popupAlert(title: nil, message: reason, actions: nil)
+        }else {
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name: "LoadRevenue",bundle: nil)
+            let loadRevenueReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "LoadRevenueReportVC") as! LoadRevenueReportVC
+            loadRevenueReportVC.serviceId = serviceId
+            loadRevenueReportVC.servicename = servicenamae
+            loadRevenueReportVC.productId = productId
+            loadRevenueReportVC.productname = productname
+            loadRevenueReportVC.paymentmodeid = paymentmodeid
+            loadRevenueReportVC.paymentmode = paymentmode
+            loadRevenueReportVC.consignorId = consignorId
+            loadRevenueReportVC.consignorName = consignorName
+            loadRevenueReportVC.branchId = branchId
+            loadRevenueReportVC.branchName = branchName
+            loadRevenueReportVC.carrierId = carrierId
+            loadRevenueReportVC.divisionId = divisionId
+            loadRevenueReportVC.regionId = regionId
+            loadRevenueReportVC.areaId = areaId
+            loadRevenueReportVC.opBranchId = opBranchId
+            loadRevenueReportVC.destinationId = destinationId
+            loadRevenueReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
+            loadRevenueReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat12)
+            loadRevenueReportVC.valueRadio = groupCriteria
+            loadRevenueReportVC.groupCriteria = selectedReportCriteria
+            self.navigationController?.pushViewController(loadRevenueReportVC, animated: true)
+        }
+        
         
     }
     func API_getDevisionDropDown(){

@@ -32,16 +32,18 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
     var billRegisterStatusArr: Array = ["Active","InActive"]
     var billRegisterConsignerArr: Array = [BillRegisterConsigner]()
     var billRegisterconsignerGroupArr: Array = [BillRegisterConsigner]()
-  
+    
     var divisionId = "0"
     var regionId = "0"
     var areaId = "0"
     var branchId = "0"
     var opBranchId = "0"
-    var selectedGroupConsignorId: Int = 0
+    var groupId: Int = 0
     var consignorId = "0"
-    var statusId = "0"
+    var status = "0"
     var selectedcnType = ""
+    var typeIdCheck = ""
+    var isGroupConsignerSelected = false
     
     var selectedCheckboxImage:UIImage?
     var unSelectedCheckboxImage:UIImage?
@@ -107,21 +109,31 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
         //OpBranch
         ddOPBranch.didSelect(completion: { (selected, index, id) in
             self.opBranchId = self.billRegisterOpBranchArr[index].opBranchId
-           
+            
         })
         //Consigner
         ddCosignor.didSelect(completion: { (selected, index, id) in
-            self.consignorId = self.billRegisterConsignerArr[index].consignorId
-            self.selectedcnType = selected
+            
+            if !selected.isEmpty {
+                    self.consignorId = self.billRegisterConsignerArr[index].consignorId
+                    self.selectedcnType = selected
+                    self.isGroupConsignerSelected = true
+                } else {
+                    self.isGroupConsignerSelected = false
+                }
         })
         //Status
         ddStatus.didSelect(completion: { (selected, index, id) in
-            self.statusId = String(index)
+            self.status = String(index)
         })
+        // Branch Type
         
+        ddBranchType.didSelect(completion: { (selected, index, id) in
+            self.typeIdCheck = String(index + 1)
+        })
         self.ddBranchType.optionArray = billRegisterBranchTypeArr
         self.ddStatus.optionArray = billRegisterStatusArr
-       
+        
         setCheckboxImage()
         
         API_getDevisionDropDown()
@@ -132,7 +144,7 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
     func disableDropdowns(){
         self.ddRegion.isUserInteractionEnabled = false
         self.ddRegion.dropdownColor = dropdownBackgroundColor
-       
+        
         self.ddArea.isUserInteractionEnabled = false
         self.ddArea.dropdownColor = dropdownBackgroundColor
         
@@ -150,7 +162,7 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
         // Set the default selection
         self.btnCheckboxGroupOn.isSelected = false
         self.btnCheckboxGroupOn.tag = 0
-     
+        
         // Set the images for both selected and normal states for both buttons
         btnCheckboxGroupOn.setImage(selectedCheckboxImage, for: .selected)
         btnCheckboxGroupOn.setImage(unSelectedCheckboxImage, for: .normal)
@@ -167,11 +179,15 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
         btnCheckboxGroupOn.setImage(selectedCheckboxImage, for: .selected)
         btnCheckboxGroupOn.setImage(unSelectedCheckboxImage, for: .normal)
         
-        selectedGroupConsignorId = sender.tag
-        if selectedGroupConsignorId == 1{
-           API_getConsigneronGroupSelectionDropDown()
+        groupId = sender.tag
+        if groupId == 1{
+            API_getConsigneronGroupSelectionDropDown()
+        }else {
+            self.billRegisterConsignerArr.removeAll()
+            self.ddCosignor.optionArray.removeAll()
+            API_getConsignerDropDown()
         }
-    
+        
     }
     @IBAction func btnFromDataTap(_ sender: Any) {
         let storyboard = UIStoryboard(name: "DateTimePicker", bundle: nil)
@@ -214,20 +230,44 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
     }
     
     @IBAction func btnSearchTap(_ sender: Any) {
-        let mainStoryBoard:UIStoryboard = UIStoryboard(name: "BillRegister",bundle: nil)
-        let billRegisterReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "BillRegisterReportVC") as! BillRegisterReportVC
-        billRegisterReportVC.divisionId = self.divisionId
-        billRegisterReportVC.regionId = self.regionId
-        billRegisterReportVC.areaId = self.areaId
-        billRegisterReportVC.branchId = self.branchId
-        billRegisterReportVC.opBranchId = self.opBranchId
-        billRegisterReportVC.consignorId = self.consignorId
-        billRegisterReportVC.groupId = String(self.selectedGroupConsignorId)
-        billRegisterReportVC.statusId = self.statusId
-        billRegisterReportVC.cnType = self.selectedcnType
-        billRegisterReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-        billRegisterReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
-        self.navigationController?.pushViewController(billRegisterReportVC, animated: true)
+        if groupId == 1  {
+            if isGroupConsignerSelected{
+                let mainStoryBoard:UIStoryboard = UIStoryboard(name: "BillRegister",bundle: nil)
+                let billRegisterReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "BillRegisterReportVC") as! BillRegisterReportVC
+                billRegisterReportVC.divisionId = self.divisionId
+                billRegisterReportVC.regionId = self.regionId
+                billRegisterReportVC.areaId = self.areaId
+                billRegisterReportVC.branchId = self.branchId
+                billRegisterReportVC.opBranchId = self.opBranchId
+                billRegisterReportVC.consignorId = self.consignorId
+                billRegisterReportVC.groupId = String(self.groupId)
+                billRegisterReportVC.status = self.status
+                billRegisterReportVC.cnType = self.selectedcnType
+                billRegisterReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+                billRegisterReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+                billRegisterReportVC.typeIdCheck = self.typeIdCheck
+                self.navigationController?.pushViewController(billRegisterReportVC, animated: true)
+            }else{
+                let reason: String = "Please Select valid Consignor!"
+                self.popupAlert(title: nil, message: reason, actions: nil)
+            }
+        }else {
+            let mainStoryBoard:UIStoryboard = UIStoryboard(name: "BillRegister",bundle: nil)
+            let billRegisterReportVC = mainStoryBoard.instantiateViewController(withIdentifier: "BillRegisterReportVC") as! BillRegisterReportVC
+            billRegisterReportVC.divisionId = self.divisionId
+            billRegisterReportVC.regionId = self.regionId
+            billRegisterReportVC.areaId = self.areaId
+            billRegisterReportVC.branchId = self.branchId
+            billRegisterReportVC.opBranchId = self.opBranchId
+            billRegisterReportVC.consignorId = self.consignorId
+            billRegisterReportVC.groupId = String(self.groupId)
+            billRegisterReportVC.status = self.status
+            billRegisterReportVC.cnType = self.selectedcnType
+            billRegisterReportVC.fromDate = DateTimeFormat.shared.convertDate(date: txtFromDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+            billRegisterReportVC.toDate = DateTimeFormat.shared.convertDate(date: txtToDate.text!, dateFromFormat: DateTimeFormat.shared.dateFormat6, dateToFormat: DateTimeFormat.shared.dateFormat1)
+            billRegisterReportVC.typeIdCheck = self.typeIdCheck
+            self.navigationController?.pushViewController(billRegisterReportVC, animated: true)
+        }
         
     }
     
@@ -400,7 +440,7 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
                     self.billRegisterConsignerArr.append(BillRegisterConsigner(json: arr))
                     self.ddCosignor.optionArray.append(arr["description"].stringValue)
                 }
-             
+                
             }else{
                 let reason: String = json["message"].stringValue
                 self.popupAlert(title: nil, message: reason, actions: nil)
@@ -421,8 +461,18 @@ class BillRegisterVC: UIViewController, DateTimePickerDelegate {
             
         }
     }
+    func API_getConsignerDropDownOnUnchecked(){
+        
+        
+        let response = response
+        
+        let consignorModel = self.response["consignorModel"]
+        for arr in consignorModel.arrayValue{
+            self.billRegisterConsignerArr.append(BillRegisterConsigner(json: arr))
+            self.ddCosignor.optionArray.append(arr["description"].stringValue)
+        }
+    }
     
-  
     
     
 }
